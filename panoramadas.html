@@ -192,6 +192,21 @@
       .desktop-nav { display: none; }
       .iframe-shell { min-height: 540px; height: 72vh; }
     }
+
+    .image-frame {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.55);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
+    }
+    
+    .image-frame img {
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    
+    .image-frame:hover img {
+      transform: scale(1.03);
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -405,54 +420,105 @@
       </div>
 
       <div class="space-y-5">
-        <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
-          <summary class="cursor-pointer flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-2xl bg-blue-600/20 border border-blue-500/25 flex items-center justify-center"><i data-lucide="image" class="w-6 h-6 text-blue-300"></i></div>
-              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p><h3 class="text-xl font-black text-white">Evidências sobre o painel da equipe</h3></div>
-            </div>
-            <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
-          </summary>
-          <div class="grid md:grid-cols-2 gap-4 mt-5">
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-1.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-2.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-3.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-4.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-          </div>
-        </details>
-
-        <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
-          <summary class="cursor-pointer flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-2xl bg-emerald-600/20 border border-emerald-500/25 flex items-center justify-center"><i data-lucide="list-checks" class="w-6 h-6 text-emerald-300"></i></div>
-              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p><h3 class="text-xl font-black text-white">Evidências das missões agrupadas</h3></div>
-            </div>
-            <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
-          </summary>
-          <div class="grid md:grid-cols-2 gap-4 mt-5">
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-1.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-2.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-3.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-4.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-          </div>
-        </details>
-
-        <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
-          <summary class="cursor-pointer flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-2xl bg-yellow-600/20 border border-yellow-500/25 flex items-center justify-center"><i data-lucide="message-circle" class="w-6 h-6 text-yellow-300"></i></div>
-              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p><h3 class="text-xl font-black text-white">Pontos focais engajando o time</h3></div>
-            </div>
-            <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
-          </summary>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
-            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-1.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-2.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-3.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-4.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
-          </div>
-        </details>
+  <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
+    <summary class="cursor-pointer flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-blue-600/20 border border-blue-500/25 flex items-center justify-center">
+          <i data-lucide="image" class="w-6 h-6 text-blue-300"></i>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p>
+          <h3 class="text-xl font-black text-white">Evidências sobre o painel da equipe</h3>
+        </div>
       </div>
+      <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
+    </summary>
+
+    <div class="grid md:grid-cols-2 gap-4 mt-5">
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgpainel-equipe-1.png" alt="Evidência sobre o painel da equipe 1" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgpainel-equipe-2.png" alt="Evidência sobre o painel da equipe 2" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgpainel-equipe-3.png" alt="Evidência sobre o painel da equipe 3" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgpainel-equipe-4.png" alt="Evidência sobre o painel da equipe 4" class="w-full h-full object-cover">
+      </figure>
+    </div>
+  </details>
+
+  <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
+    <summary class="cursor-pointer flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-emerald-600/20 border border-emerald-500/25 flex items-center justify-center">
+          <i data-lucide="list-checks" class="w-6 h-6 text-emerald-300"></i>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p>
+          <h3 class="text-xl font-black text-white">Evidências das missões agrupadas</h3>
+        </div>
+      </div>
+      <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
+    </summary>
+
+    <div class="grid md:grid-cols-2 gap-4 mt-5">
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgmissoes-agrupadas-1.png" alt="Evidência das missões agrupadas 1" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgmissoes-agrupadas-2.png" alt="Evidência das missões agrupadas 2" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgmissoes-agrupadas-3.png" alt="Evidência das missões agrupadas 3" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
+        <img src="imgmissoes-agrupadas-4.png" alt="Evidência das missões agrupadas 4" class="w-full h-full object-cover">
+      </figure>
+    </div>
+  </details>
+
+  <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
+    <summary class="cursor-pointer flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-yellow-600/20 border border-yellow-500/25 flex items-center justify-center">
+          <i data-lucide="message-circle" class="w-6 h-6 text-yellow-300"></i>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p>
+          <h3 class="text-xl font-black text-white">Pontos focais engajando o time</h3>
+        </div>
+      </div>
+      <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
+    </summary>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+      <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
+        <img src="imgpontos-focais-1.png" alt="Pontos focais engajando o time 1" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
+        <img src="imgpontos-focais-2.png" alt="Pontos focais engajando o time 2" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
+        <img src="imgpontos-focais-3.png" alt="Pontos focais engajando o time 3" class="w-full h-full object-cover">
+      </figure>
+
+      <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
+        <img src="imgpontos-focais-4.png" alt="Pontos focais engajando o time 4" class="w-full h-full object-cover">
+      </figure>
+    </div>
+  </details>
+</div>
 
       <div class="grid lg:grid-cols-3 gap-6">
         <section class="glass-panel glow-emerald rounded-3xl p-5 sm:p-6 lg:col-span-2">
