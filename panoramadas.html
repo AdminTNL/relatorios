@@ -436,19 +436,19 @@
 
     <div class="grid md:grid-cols-2 gap-4 mt-5">
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgpainel-equipe-1.png" alt="Evidência sobre o painel da equipe 1" class="w-full h-full object-cover">
+        <img src="imgpainel-equipe-1.png" alt="Evidência sobre o painel da equipe 1" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgpainel-equipe-2.png" alt="Evidência sobre o painel da equipe 2" class="w-full h-full object-cover">
+        <img src="imgpainel-equipe-2.png" alt="Evidência sobre o painel da equipe 2" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)>
       </figure>
 
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgpainel-equipe-3.png" alt="Evidência sobre o painel da equipe 3" class="w-full h-full object-cover">
+        <img src="imgpainel-equipe-3.png" alt="Evidência sobre o painel da equipe 3" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgpainel-equipe-4.png" alt="Evidência sobre o painel da equipe 4" class="w-full h-full object-cover">
+        <img src="imgpainel-equipe-4.png" alt="Evidência sobre o painel da equipe 4" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
     </div>
   </details>
@@ -469,19 +469,19 @@
 
     <div class="grid md:grid-cols-2 gap-4 mt-5">
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgmissoes-agrupadas-1.png" alt="Evidência das missões agrupadas 1" class="w-full h-full object-cover">
+        <img src="imgmissoes-agrupadas-1.png" alt="Evidência das missões agrupadas 1" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgmissoes-agrupadas-2.png" alt="Evidência das missões agrupadas 2" class="w-full h-full object-cover">
+        <img src="imgmissoes-agrupadas-2.png" alt="Evidência das missões agrupadas 2" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgmissoes-agrupadas-3.png" alt="Evidência das missões agrupadas 3" class="w-full h-full object-cover">
+        <img src="imgmissoes-agrupadas-3.png" alt="Evidência das missões agrupadas 3" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-horizontal rounded-3xl overflow-hidden">
-        <img src="imgmissoes-agrupadas-4.png" alt="Evidência das missões agrupadas 4" class="w-full h-full object-cover">
+        <img src="imgmissoes-agrupadas-4.png" alt="Evidência das missões agrupadas 4" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
     </div>
   </details>
@@ -502,19 +502,19 @@
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
       <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
-        <img src="imgpontos-focais-1.png" alt="Pontos focais engajando o time 1" class="w-full h-full object-cover">
+        <img src="imgpontos-focais-1.png" alt="Pontos focais engajando o time 1" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
-        <img src="imgpontos-focais-2.png" alt="Pontos focais engajando o time 2" class="w-full h-full object-cover">
+        <img src="imgpontos-focais-2.png" alt="Pontos focais engajando o time 2" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
-        <img src="imgpontos-focais-3.png" alt="Pontos focais engajando o time 3" class="w-full h-full object-cover">
+        <img src="imgpontos-focais-3.png" alt="Pontos focais engajando o time 3" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
 
       <figure class="image-frame aspect-vertical rounded-3xl overflow-hidden">
-        <img src="imgpontos-focais-4.png" alt="Pontos focais engajando o time 4" class="w-full h-full object-cover">
+        <img src="imgpontos-focais-4.png" alt="Pontos focais engajando o time 4" class="w-full h-full object-cover cursor-zoom-in" onclick="openImageModal(this.src, this.alt)">
       </figure>
     </div>
   </details>
@@ -626,6 +626,62 @@
     }
 
     lucide.createIcons();
+
+    function openImageModal(src, alt) {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('image-modal-img');
+      const caption = document.getElementById('image-modal-caption');
+    
+      modalImg.src = src;
+      modalImg.alt = alt || 'Imagem ampliada';
+      caption.textContent = alt || '';
+    
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    
+      lucide.createIcons();
+    }
+    
+    function closeImageModal() {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('image-modal-img');
+    
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+    
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeImageModal();
+      }
+    });
   </script>
+  <div 
+  id="image-modal" 
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/90 backdrop-blur-md p-4"
+  onclick="closeImageModal()"
+>
+  <button 
+    type="button"
+    class="absolute top-4 right-4 w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition-all"
+    onclick="closeImageModal()"
+    aria-label="Fechar imagem"
+  >
+    <i data-lucide="x" class="w-6 h-6"></i>
+  </button>
+
+  <div class="max-w-6xl w-full max-h-[90vh] flex flex-col items-center gap-3" onclick="event.stopPropagation()">
+    <img 
+      id="image-modal-img" 
+      src="" 
+      alt="" 
+      class="max-w-full max-h-[82vh] object-contain rounded-3xl border border-white/10 shadow-2xl"
+    >
+    <p id="image-modal-caption" class="text-sm text-slate-300 text-center"></p>
+  </div>
+</div>
 </body>
 </html>
