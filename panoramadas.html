@@ -684,100 +684,100 @@
   </footer>
 
   <script>
-    const TABS = ['visao', 'monitoramento', 'interacao'];
-    const $ = (id) => document.getElementById(id);
+  const TABS = ['visao', 'monitoramento', 'interacao'];
+  const REPORT_PASSWORD = 'panorama2026';
+  const $ = (id) => document.getElementById(id);
 
-    function switchTab(tab) {
-      TABS.forEach(key => {
-        $('tab-' + key).classList.toggle('active', key === tab);
-        $('btn-' + key)?.classList.toggle('active', key === tab);
-        $('btn-mobile-' + key)?.classList.toggle('active', key === tab);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      lucide.createIcons();
-    }
+  function switchTab(tab) {
+    TABS.forEach(key => {
+      $('tab-' + key).classList.toggle('active', key === tab);
+      $('btn-' + key)?.classList.toggle('active', key === tab);
+      $('btn-mobile-' + key)?.classList.toggle('active', key === tab);
+    });
 
-    async function copyPassword() {
-      try {
-        await navigator.clipboard.writeText('engaja2026');
-        const feedback = $('copy-feedback');
-        feedback.classList.remove('hidden');
-        setTimeout(() => feedback.classList.add('hidden'), 2200);
-      } catch (error) {
-        alert('Senha: engaja2026');
-      }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    lucide.createIcons();
+  }
+
+  async function copyPassword() {
+    try {
+      await navigator.clipboard.writeText('engaja2026');
+      const feedback = $('copy-feedback');
+      feedback.classList.remove('hidden');
+      setTimeout(() => feedback.classList.add('hidden'), 2200);
+    } catch (error) {
+      alert('Senha: engaja2026');
     }
+  }
+
+  function openImageModal(src, alt) {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('image-modal-img');
+    const caption = document.getElementById('image-modal-caption');
+
+    modalImg.src = src;
+    modalImg.alt = alt || 'Imagem ampliada';
+    caption.textContent = alt || '';
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
 
     lucide.createIcons();
+  }
 
-    function openImageModal(src, alt) {
-      const modal = document.getElementById('image-modal');
-      const modalImg = document.getElementById('image-modal-img');
-      const caption = document.getElementById('image-modal-caption');
-    
-      modalImg.src = src;
-      modalImg.alt = alt || 'Imagem ampliada';
-      caption.textContent = alt || '';
-    
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-    
-      lucide.createIcons();
-    }
-    
-    function closeImageModal() {
-      const modal = document.getElementById('image-modal');
-      const modalImg = document.getElementById('image-modal-img');
-    
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      modalImg.src = '';
-      document.body.style.overflow = '';
-    }
-    
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeImageModal();
-      }
+  function closeImageModal() {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('image-modal-img');
 
-      const REPORT_PASSWORD = 'panorama2026';
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    modalImg.src = '';
+    document.body.style.overflow = '';
+  }
 
-    function checkReportPassword() {
-      const input = document.getElementById('password-input');
-      const error = document.getElementById('password-error');
-      const gate = document.getElementById('password-gate');
-    
-      if (input.value === REPORT_PASSWORD) {
-        gate.style.display = 'none';
-        sessionStorage.setItem('panorama_report_unlocked', 'true');
-      } else {
-        error.classList.remove('hidden');
-        input.value = '';
-        input.focus();
-      }
+  function checkReportPassword() {
+    const input = document.getElementById('password-input');
+    const error = document.getElementById('password-error');
+    const gate = document.getElementById('password-gate');
+
+    if (input.value === REPORT_PASSWORD) {
+      gate.style.display = 'none';
+      sessionStorage.setItem('panorama_report_unlocked', 'true');
+    } else {
+      error.classList.remove('hidden');
+      input.value = '';
+      input.focus();
     }
-    
-    document.addEventListener('DOMContentLoaded', function () {
-      const gate = document.getElementById('password-gate');
-      const input = document.getElementById('password-input');
-    
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeImageModal();
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const gate = document.getElementById('password-gate');
+    const input = document.getElementById('password-input');
+
+    if (gate && input) {
       if (sessionStorage.getItem('panorama_report_unlocked') === 'true') {
         gate.style.display = 'none';
       } else {
         input.focus();
       }
-    
+
       input.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
           checkReportPassword();
         }
       });
-    
-      lucide.createIcons();
-    });
-     
-  </script>
+    }
+
+    lucide.createIcons();
+  });
+</script>
   <div 
   id="image-modal" 
   class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/90 backdrop-blur-md p-4"
