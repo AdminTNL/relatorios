@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório Geral • Panorama PA</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: #f1f5f9;
+      background-image:
+        radial-gradient(at top left, rgba(59, 130, 246, 0.05), transparent 60%),
+        radial-gradient(at bottom right, rgba(16, 185, 129, 0.05), transparent 60%);
+      background-attachment: fixed;
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-panel:hover {
+      box-shadow: none !important;
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(30, 41, 59, 0.55);
+    }
+
+    .no-hover:hover {
+      transform: none;
+      background: rgba(15, 23, 42, 0.72);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2) !important;
+    }
+
+    .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.12); }
+    .glow-emerald { box-shadow: 0 0 20px rgba(16, 185, 129, 0.12); }
+    .glow-yellow { box-shadow: 0 0 20px rgba(234, 179, 8, 0.12); }
+    .glow-purple { box-shadow: 0 0 20px rgba(168, 85, 247, 0.12); }
+    .glow-red { box-shadow: 0 0 20px rgba(239, 68, 68, 0.12); }
+
+    .nav-btn {
+      position: relative;
+      padding-bottom: 4px;
+      color: #94a3b8;
+      transition: all .3s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn.active {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .nav-btn.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #3b82f6, #10b981);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active {
+      display: block;
+      animation: slideUp .45s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .meeting-pill {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 1rem;
+      padding: .9rem 1rem;
+    }
+
+    .mono {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
+
+    .campaign-shell {
+      background: linear-gradient(135deg, #0f172a 0%, #172554 45%, #1e3a8a 100%);
+      border: 1px solid rgba(30, 58, 138, 0.28);
+    }
+
+    .soft-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      border-radius: 999px;
+      padding: .4rem .7rem;
+      font-size: .72rem;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .soft-pill-blue { background: rgba(191, 219, 254, 0.92); color: #1d4ed8; }
+    .soft-pill-green { background: rgba(209, 250, 229, 0.95); color: #047857; }
+    .soft-pill-yellow { background: rgba(255, 237, 213, 0.95); color: #b45309; }
+    .soft-pill-purple { background: rgba(237, 233, 254, 0.95); color: #7c3aed; }
+    .soft-pill-red { background: rgba(254, 226, 226, 0.95); color: #b91c1c; }
+
+    .report-card {
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+
+    .report-card:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10), 0 14px 28px rgba(59, 130, 246, 0.08);
+      transform: translateY(-2px);
+    }
+
+    details.evidence-block summary::-webkit-details-marker { display: none; }
+    details.evidence-block summary { list-style: none; }
+
+    details.evidence-block[open] summary .chevron {
+      transform: rotate(180deg);
+    }
+
+    .image-placeholder {
+      border: 1px dashed rgba(148, 163, 184, 0.42);
+      background:
+        linear-gradient(135deg, rgba(15,23,42,0.92), rgba(30,41,59,0.64)),
+        repeating-linear-gradient(45deg, rgba(148,163,184,0.06) 0 10px, transparent 10px 20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .aspect-horizontal { aspect-ratio: 16 / 9; }
+    .aspect-vertical { aspect-ratio: 9 / 16; }
+
+    .iframe-shell {
+      height: 80vh;
+      min-height: 620px;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(2, 6, 23, 0.82);
+    }
+
+    .iframe-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #020617;
+    }
+
+    .mini-timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.1rem;
+      top: 1.25rem;
+      bottom: 1.25rem;
+      width: 1px;
+      background: linear-gradient(#3b82f6, #10b981);
+      opacity: .45;
+    }
+
+    @media (max-width: 767px) {
+      .mobile-nav { display: grid; }
+      .desktop-nav { display: none; }
+      .iframe-shell { min-height: 540px; height: 72vh; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+  <header class="sticky top-0 w-full z-40 glass-panel border-b border-white/5 bg-slate-950/80 no-hover">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 min-h-20 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="flex items-center gap-4 min-w-0">
+        <div class="w-11 h-11 rounded-2xl bg-blue-600/20 border border-blue-500/25 flex items-center justify-center shrink-0">
+          <i data-lucide="bar-chart-3" class="w-6 h-6 text-blue-400"></i>
+        </div>
+        <div class="leading-tight min-w-0">
+          <h1 class="text-base sm:text-lg font-bold text-white tracking-wide truncate">Relatório Geral • Panorama PA</h1>
+          <p class="text-[11px] text-slate-400 uppercase tracking-[0.18em] font-semibold">Central de Engajamento • Janeiro a Abril</p>
+        </div>
+      </div>
+
+      <nav class="desktop-nav hidden md:flex gap-8 text-sm overflow-x-auto">
+        <button onclick="switchTab('visao')" id="btn-visao" class="nav-btn active">Visão geral</button>
+        <button onclick="switchTab('monitoramento')" id="btn-monitoramento" class="nav-btn">Monitoramento e evolução</button>
+        <button onclick="switchTab('interacao')" id="btn-interacao" class="nav-btn">Interação e estratégias</button>
+      </nav>
+
+      <nav class="mobile-nav hidden grid-cols-1 sm:grid-cols-3 gap-2 w-full text-sm">
+        <button onclick="switchTab('visao')" id="btn-mobile-visao" class="nav-btn active text-left meeting-pill">Visão geral</button>
+        <button onclick="switchTab('monitoramento')" id="btn-mobile-monitoramento" class="nav-btn text-left meeting-pill">Monitoramento</button>
+        <button onclick="switchTab('interacao')" id="btn-mobile-interacao" class="nav-btn text-left meeting-pill">Interação</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8">
+    <section id="tab-visao" class="tab-content active space-y-8">
+      <div class="glass-panel glow-blue rounded-3xl p-5 sm:p-8">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div>
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-2">Relatório executivo</p>
+            <h2 class="text-3xl sm:text-5xl font-black text-white leading-tight">Panorama DAS</h2>
+            <p class="text-slate-300 text-sm sm:text-base mt-4 max-w-4xl">
+              Entre janeiro e abril, a estratégia combinou disparos individuais, ações coordenadas em comunidades, relacionamento com pontos focais e acompanhamento por painel. O objetivo foi ampliar o volume de impactos, facilitar respostas, aumentar a proximidade com a audiência e transformar interações em mobilização recorrente.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 shrink-0 w-full lg:w-auto">
+            <div class="meeting-pill">
+              <span class="block text-[11px] uppercase tracking-[0.18em] text-slate-400 font-semibold mb-2">Período</span>
+              <strong class="text-white">Jan • Fev • Mar • Abr</strong>
+            </div>
+            <div class="meeting-pill">
+              <span class="block text-[11px] uppercase tracking-[0.18em] text-slate-400 font-semibold mb-2">Foco</span>
+              <strong class="text-white">Pontos focais</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div class="glass-panel glow-blue rounded-3xl p-5 min-h-[132px]">
+          <p class="text-xs uppercase tracking-[0.18em] text-blue-300 font-bold mb-2">Impactos diretos</p>
+          <div class="text-4xl font-black text-white mono">769.638</div>
+          <p class="text-slate-400 text-sm mt-2">Soma consolidada de janeiro, fevereiro e março.</p>
+        </div>
+        <div class="glass-panel glow-emerald rounded-3xl p-5 min-h-[132px]">
+          <p class="text-xs uppercase tracking-[0.18em] text-emerald-300 font-bold mb-2">Envios operacionais</p>
+          <div class="text-4xl font-black text-white mono">7.253</div>
+          <p class="text-slate-400 text-sm mt-2">Disparos 1 a 1 somados aos envios em comunidades.</p>
+        </div>
+        <div class="glass-panel glow-yellow rounded-3xl p-5 min-h-[132px]">
+          <p class="text-xs uppercase tracking-[0.18em] text-yellow-300 font-bold mb-2">Disparos 1 a 1</p>
+          <div class="text-4xl font-black text-white mono">6.481</div>
+          <p class="text-slate-400 text-sm mt-2">Volume direto usado para contato individualizado.</p>
+        </div>
+        <div class="glass-panel glow-purple rounded-3xl p-5 min-h-[132px]">
+          <p class="text-xs uppercase tracking-[0.18em] text-purple-300 font-bold mb-2">Pontos focais</p>
+          <div class="text-4xl font-black text-white mono">27</div>
+          <p class="text-slate-400 text-sm mt-2">Com base no mapeamento das planilhas.</p>
+        </div>
+      </div>
+
+      <div class="campaign-shell rounded-3xl p-5 sm:p-6 shadow-xl">
+        <header class="flex items-start justify-between gap-4 flex-wrap border-b border-white/10 pb-4 mb-5">
+          <div>
+            <h3 class="text-2xl font-black text-white">Cronograma mensal consolidado</h3>
+            <p class="text-sm text-slate-300 mt-1 max-w-3xl">Impactos, canais e detalhamento técnico.</p>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="soft-pill soft-pill-blue">Janeiro</span>
+            <span class="soft-pill soft-pill-green">Fevereiro</span>
+            <span class="soft-pill soft-pill-yellow">Março</span>
+          </div>
+        </header>
+
+        <div class="grid lg:grid-cols-3 gap-5">
+          <article class="report-card rounded-3xl bg-white/95 text-slate-900 p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-blue-100 flex items-center justify-center"><i data-lucide="calendar-days" class="w-5 h-5 text-blue-700"></i></div>
+              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-500 font-bold">Mês 01</p><h4 class="text-xl font-black">Janeiro</h4></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-3"><span class="block text-[11px] uppercase tracking-[0.15em] text-slate-400 font-bold">Impactos</span><strong class="text-2xl mono">356.969</strong></div>
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-3"><span class="block text-[11px] uppercase tracking-[0.15em] text-slate-400 font-bold">Envios</span><strong class="text-2xl mono">3.230</strong></div>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><strong class="text-slate-900">1 a 1:</strong> 2.864 mensagens.</li>
+              <li><strong class="text-slate-900">Comunidades:</strong> 366 mensagens, sendo 183 em cada comunidade.</li>
+              <li><strong class="text-slate-900">Confiáveis:</strong> 183 × 1.427 membros = 261.141 impactos.</li>
+              <li><strong class="text-slate-900">Comunidade B:</strong> 183 × 508 membros = 92.964 impactos.</li>
+            </ul>
+          </article>
+
+          <article class="report-card rounded-3xl bg-white/95 text-slate-900 p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-emerald-100 flex items-center justify-center"><i data-lucide="calendar-check" class="w-5 h-5 text-emerald-700"></i></div>
+              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-500 font-bold">Mês 02</p><h4 class="text-xl font-black">Fevereiro</h4></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-3"><span class="block text-[11px] uppercase tracking-[0.15em] text-slate-400 font-bold">Impactos</span><strong class="text-2xl mono">93.649</strong></div>
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-3"><span class="block text-[11px] uppercase tracking-[0.15em] text-slate-400 font-bold">Envios</span><strong class="text-2xl mono">1.576</strong></div>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><strong class="text-slate-900">1 a 1:</strong> 1.482 mensagens.</li>
+              <li><strong class="text-slate-900">Comunidades:</strong> 94 mensagens, sendo 47 em cada comunidade.</li>
+              <li><strong class="text-slate-900">Confiáveis:</strong> 47 × 1.459 membros = 68.573 impactos.</li>
+              <li><strong class="text-slate-900">Comunidade B:</strong> 47 × 502 membros = 23.594 impactos.</li>
+            </ul>
+          </article>
+
+          <article class="report-card rounded-3xl bg-white/95 text-slate-900 p-5">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-2xl bg-yellow-100 flex items-center justify-center"><i data-lucide="calendar-range" class="w-5 h-5 text-yellow-700"></i></div>
+              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-500 font-bold">Mês 03</p><h4 class="text-xl font-black">Março</h4></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-3"><span class="block text-[11px] uppercase tracking-[0.15em] text-slate-400 font-bold">Impactos</span><strong class="text-2xl mono">319.020</strong></div>
+              <div class="rounded-2xl bg-slate-50 border border-slate-200 p-3"><span class="block text-[11px] uppercase tracking-[0.15em] text-slate-400 font-bold">Envios</span><strong class="text-2xl mono">2.447</strong></div>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><strong class="text-slate-900">1 a 1:</strong> 2.135 mensagens.</li>
+              <li><strong class="text-slate-900">Comunidades:</strong> 312 mensagens, sendo 156 em cada comunidade.</li>
+              <li><strong class="text-slate-900">Confiáveis:</strong> 156 × 1.543 membros = 240.708 impactos.</li>
+              <li><strong class="text-slate-900">Comunidade B:</strong> 156 × 502 membros = 78.312 impactos.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-6">
+        <section class="glass-panel glow-emerald rounded-3xl p-5 sm:p-6">
+          <div class="flex items-start gap-3 mb-5">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center"><i data-lucide="users-round" class="w-6 h-6 text-emerald-300"></i></div>
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-1">Principal foco</p>
+              <h3 class="text-2xl font-black text-white">Pontos focais</h3>
+            </div>
+          </div>
+          <p class="text-slate-300 text-sm mb-5">O relatório mapeia 1.066 comissionados e 27 pontos focais, destacando os perfis com maior colaboração, menor engajamento e ausência de atividades no período.</p>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="meeting-pill"><span class="text-[11px] uppercase tracking-[0.18em] text-slate-400 font-bold">Comissionados</span><div class="text-3xl font-black mono mt-1">1.066</div></div>
+            <div class="meeting-pill"><span class="text-[11px] uppercase tracking-[0.18em] text-slate-400 font-bold">Pontos focais</span><div class="text-3xl font-black mono mt-1">27</div></div>
+          </div>
+          <p class="text-slate-300 text-sm mb-5">Visão mais aprofundada na aba 'Interação e estratégias'</p>
+        </section>
+
+        <section class="glass-panel rounded-3xl p-5 sm:p-6 relative mini-timeline">
+          <h3 class="text-xl font-black text-white mb-5 pl-10">Leitura executiva</h3>
+          <div class="space-y-5 pl-10">
+            <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-5 h-5 rounded-full bg-blue-500 border-4 border-slate-900"></span><h4 class="font-bold text-white">Volume e alcance</h4><p class="text-sm text-slate-400 mt-1">As comunidades geraram grande escala de impactos, enquanto os envios 1 a 1 sustentaram a proximidade individual.</p></div>
+            <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-5 h-5 rounded-full bg-emerald-500 border-4 border-slate-900"></span><h4 class="font-bold text-white">Mobilização orientada</h4><p class="text-sm text-slate-400 mt-1">O painel de mobilização serve como base para identificar lideranças, ausências e oportunidades de acompanhamento.</p></div>
+            <div class="relative"><span class="absolute -left-[2.35rem] top-1 w-5 h-5 rounded-full bg-yellow-500 border-4 border-slate-900"></span><h4 class="font-bold text-white">Próxima etapa</h4><p class="text-sm text-slate-400 mt-1">Valorizar os destaques e atuar individualmente com quem aparece com menor presença ou sem atividades.</p></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="tab-monitoramento" class="tab-content space-y-8">
+      <div class="glass-panel glow-emerald rounded-3xl p-5 sm:p-8">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div>
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-2">Monitoramento e evolução</p>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">Painel de Mobilização</h2>
+            <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-4xl">Esta aba incorpora o painel operacional usado para acompanhar a situação atual, evolução do engajamento, participação por liderança e sinais de atenção no período selecionado. Use a senha ao lado no painel apresentado logo abaixo.</p>
+          </div>
+          <div class="meeting-pill max-w-md">
+            <span class="block text-[11px] uppercase tracking-[0.18em] text-yellow-300 font-bold mb-2">Acesso protegido</span>
+            <p class="text-sm text-slate-300">Quando o painel pedir a senha, digite:</p>
+            <div class="mt-3 flex items-center justify-between gap-3 rounded-2xl bg-slate-950/80 border border-white/10 px-4 py-3">
+              <code class="text-xl font-black text-white tracking-wide">engaja2026</code>
+              <button onclick="copyPassword()" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all">Copiar</button>
+            </div>
+            <p id="copy-feedback" class="hidden mt-2 text-xs text-emerald-300 font-semibold">Senha copiada.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel rounded-3xl p-4 sm:p-5 no-hover">
+        <div class="flex items-center gap-3 mb-4 px-1">
+          <div class="w-10 h-10 rounded-2xl bg-blue-600/20 border border-blue-500/25 flex items-center justify-center"><i data-lucide="layout-dashboard" class="w-5 h-5 text-blue-300"></i></div>
+          <div>
+            <h3 class="text-lg font-bold text-white">Relatório incorporado</h3>
+            <p class="text-sm text-slate-400">Caso o painel não carregue de primeira, confira a senha e recarregue a página.</p>
+          </div>
+        </div>
+        <div class="iframe-shell">
+          <iframe src="https://painel-mobilizacao.netlify.app/?base=PA&lider=todos&dataInicio=2026-04-10&dataFim=2026-04-17" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-interacao" class="tab-content space-y-8">
+      <div class="glass-panel glow-purple rounded-3xl p-5 sm:p-8">
+        <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-2">Interação e relacionamento</p>
+        <h2 class="text-3xl sm:text-4xl font-black text-white">Evidências, pontos focais e estratégias</h2>
+        <p class="text-slate-300 text-sm sm:text-base mt-3 max-w-4xl">Esta aba concentra as evidências visuais da operação, a leitura do relacionamento com os pontos focais, os principais avanços e os próximos movimentos recomendados.</p>
+      </div>
+
+      <div class="space-y-5">
+        <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
+          <summary class="cursor-pointer flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-blue-600/20 border border-blue-500/25 flex items-center justify-center"><i data-lucide="image" class="w-6 h-6 text-blue-300"></i></div>
+              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p><h3 class="text-xl font-black text-white">Evidências sobre o painel da equipe</h3></div>
+            </div>
+            <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
+          </summary>
+          <div class="grid md:grid-cols-2 gap-4 mt-5">
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-1.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-2.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-3.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-blue-300"></i><p class="text-sm font-bold text-white">img/painel-equipe-4.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+          </div>
+        </details>
+
+        <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
+          <summary class="cursor-pointer flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-emerald-600/20 border border-emerald-500/25 flex items-center justify-center"><i data-lucide="list-checks" class="w-6 h-6 text-emerald-300"></i></div>
+              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p><h3 class="text-xl font-black text-white">Evidências das missões agrupadas</h3></div>
+            </div>
+            <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
+          </summary>
+          <div class="grid md:grid-cols-2 gap-4 mt-5">
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-1.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-2.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-3.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-horizontal rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-emerald-300"></i><p class="text-sm font-bold text-white">img/missoes-agrupadas-4.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+          </div>
+        </details>
+
+        <details class="evidence-block glass-panel rounded-3xl p-5 sm:p-6 no-hover">
+          <summary class="cursor-pointer flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-2xl bg-yellow-600/20 border border-yellow-500/25 flex items-center justify-center"><i data-lucide="message-circle" class="w-6 h-6 text-yellow-300"></i></div>
+              <div><p class="text-xs uppercase tracking-[0.18em] text-slate-400 font-bold">4 imagens</p><h3 class="text-xl font-black text-white">Pontos focais engajando o time</h3></div>
+            </div>
+            <i data-lucide="chevron-down" class="chevron w-6 h-6 text-slate-400 transition-transform"></i>
+          </summary>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-1.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-2.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-3.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+            <figure class="image-placeholder aspect-vertical rounded-3xl"><div><i data-lucide="image-plus" class="w-8 h-8 mx-auto mb-2 text-yellow-300"></i><p class="text-sm font-bold text-white">img/pontos-focais-4.png</p><p class="text-xs text-slate-400 mt-1">Substitua pelo arquivo no GitHub</p></div></figure>
+          </div>
+        </details>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <section class="glass-panel glow-emerald rounded-3xl p-5 sm:p-6 lg:col-span-2">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center"><i data-lucide="handshake" class="w-6 h-6 text-emerald-300"></i></div>
+            <div><p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-1">Relacionamento</p><h3 class="text-2xl font-black text-white">Pontos de contato</h3></div>
+          </div>
+          <p class="text-slate-300 text-sm leading-6">Foram mapeados os pontos focais mais engajados, segmentados entre “Vapores” e “Lideranças Locais”. O objetivo central é converter o volume de interações em compromissos de longo prazo por meio de incentivos, reconhecimento e mérito, permitindo que os destaques se percebam como protagonistas na construção e no aprimoramento das políticas públicas.</p>
+        </section>
+
+        <section class="glass-panel glow-blue rounded-3xl p-5 sm:p-6">
+          <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-2">Mais engajados</p>
+          <div class="space-y-2 text-sm text-slate-300">
+            <p>Carlos e Thais • SEDEME</p><p>Aluizio e Kleyce • IASEP</p><p>Nathalia • PARAPAZ</p><p>Tadeu • HEMOPA</p><p>Rita • SECOM</p><p>Ana Márcia • SESPA</p><p>Luan • DETRAN</p><p>Alex • FAPESPA</p><p>Iris e Vitória • SEPLAD</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <section class="glass-panel glow-yellow rounded-3xl p-5 sm:p-6">
+          <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-2">Menor engajamento</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="soft-pill soft-pill-yellow">Gabriel e Bruno • ITERPA</span>
+            <span class="soft-pill soft-pill-yellow">Juan • BANPARA</span>
+            <span class="soft-pill soft-pill-yellow">Ykaro • ADEPARA</span>
+            <span class="soft-pill soft-pill-yellow">Gabriela e Mariana • PRODEPA</span>
+            <span class="soft-pill soft-pill-yellow">Lilian Guedes • SEDUC</span>
+          </div>
+        </section>
+        <section class="glass-panel glow-red rounded-3xl p-5 sm:p-6">
+          <p class="text-xs uppercase tracking-[0.2em] text-slate-400 font-bold mb-2">Sem atividades registradas</p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="soft-pill soft-pill-red">Luciano Maués • SEAC</span>
+            <span class="soft-pill soft-pill-red">Juan Philipe • BANPARA</span>
+            <span class="soft-pill soft-pill-red">Mariana Carvalho • PRODEPA</span>
+            <span class="soft-pill soft-pill-red">Jackeline Cristo • OUVIDORIA</span>
+            <span class="soft-pill soft-pill-red">Gabriel • ITERPA</span>
+            <span class="soft-pill soft-pill-red">Bruno • ITERPA</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <section class="glass-panel rounded-3xl p-5 sm:p-6">
+          <div class="flex items-center gap-3 mb-4"><i data-lucide="trending-up" class="w-6 h-6 text-blue-300"></i><h3 class="text-xl font-black text-white">Principais avanços</h3></div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li>• Cards de tutoriais sobre como realizar missões.</li>
+            <li>• Vídeos explicativos de apoio à operação.</li>
+            <li>• Reuniões quinzenais com pontos focais.</li>
+            <li>• Ranking de mais engajados.</li>
+            <li>• Missões organizadas em lista.</li>
+            <li>• Painel de mobilização para monitoramento.</li>
+          </ul>
+        </section>
+
+        <section class="glass-panel rounded-3xl p-5 sm:p-6">
+          <div class="flex items-center gap-3 mb-4"><i data-lucide="alert-triangle" class="w-6 h-6 text-yellow-300"></i><h3 class="text-xl font-black text-white">Pontos de atenção</h3></div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li>• Reforçar a presença dos pontos focais faltantes nas reuniões.</li>
+            <li>• Valorizar bons desempenhos com mensagens, agradecimentos e presença próxima da liderança.</li>
+            <li>• Atuar individualmente com pontos focais de menor engajamento para entender bloqueios e necessidades.</li>
+          </ul>
+        </section>
+
+        <section class="glass-panel rounded-3xl p-5 sm:p-6">
+          <div class="flex items-center gap-3 mb-4"><i data-lucide="rocket" class="w-6 h-6 text-emerald-300"></i><h3 class="text-xl font-black text-white">Próximos passos</h3></div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li>• Reforçar a comunicação com mensagens recorrentes.</li>
+            <li>• Criar e reenviar cards explicativos sobre incentivo e realização de missões.</li>
+            <li>• Relembrar a necessidade de responder grupos e focar na Central.</li>
+            <li>• Produzir novos materiais mesmo quando temas semelhantes já tiverem sido enviados.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/5 bg-slate-950/90 py-8 text-center px-4">
+    <p class="text-slate-500 text-[11px] uppercase tracking-[0.18em]">Relatório Geral • Central de Engajamento • Panorama PA</p>
+  </footer>
+
+  <script>
+    const TABS = ['visao', 'monitoramento', 'interacao'];
+    const $ = (id) => document.getElementById(id);
+
+    function switchTab(tab) {
+      TABS.forEach(key => {
+        $('tab-' + key).classList.toggle('active', key === tab);
+        $('btn-' + key)?.classList.toggle('active', key === tab);
+        $('btn-mobile-' + key)?.classList.toggle('active', key === tab);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    async function copyPassword() {
+      try {
+        await navigator.clipboard.writeText('engaja2026');
+        const feedback = $('copy-feedback');
+        feedback.classList.remove('hidden');
+        setTimeout(() => feedback.classList.add('hidden'), 2200);
+      } catch (error) {
+        alert('Senha: engaja2026');
+      }
+    }
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
